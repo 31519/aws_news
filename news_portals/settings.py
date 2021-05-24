@@ -108,6 +108,17 @@ else:
         }
     }
 
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': 'ebdb',
+#             'USER': 'Awsnews1',
+#             'PASSWORD': 'mydarklover31519',
+#             'HOST': 'aa1o6fj47re0ui.cdnkeffdh7fg.us-west-2.rds.amazonaws.com',
+#             'PORT': 5432,
+#         }
+#     }
+
 
 # DATABASES = {
 #     'default': {
