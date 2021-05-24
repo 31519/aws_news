@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=True, cast=bool) # True or false
 
-ALLOWED_HOSTS = ['AgainNewEnv.eba-42djuzjj.us-west-2.elasticbeanstalk.com', '*']
+ALLOWED_HOSTS = ['aws-news-env.eba-q8m9ifv2.us-west-2.elasticbeanstalk.com', '*']
 
 
 # Application definition
