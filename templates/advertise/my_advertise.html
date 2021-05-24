@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <div class="content-wrapper">
+          <div class="container">
+            <div class="row" data-aos="fade-up">
+              <div class="col-xl-12 stretch-card grid-margin">
+                <div class="card bg-dark text-white">
+                  <div class="card-body">
+                    <h2>My Profile</h2>
+
+                    <div
+                      class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
+                    >
+                    
+                    <div class="pr-3">
+                      <label for="">Category</label>
+                        {{form.adv_category}}
+                        <br>
+                        <label for="">Topic</label>
+                        {{form.adv_heading}}
+                        <br>
+                      
+                        <label for="">Start Date</label>
+                        {{form.adv_start_date}}
+                        <br>
+                        
+                        <br>
+                        <label for="">end Date</label>
+                        {{form.adv_end_date}}
+                      </div>
+
+                      <div class="rotate-img">
+                        <img
+                          src="{% static 'images/dashboard/home_1.jpg' %}"
+                          alt="thumb"
+                          class="img-fluid img-lg"
+                        />
+                        <label for="">Photo</label> <br>
+                        {{form.adv_images}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+{% endblock %}
