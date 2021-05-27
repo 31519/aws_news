@@ -24,6 +24,7 @@ urlpatterns = [
     path('register/', include('accounts.urls')),
     path('advertise/', include('advertise.urls')),
 
+
 ]
 
 

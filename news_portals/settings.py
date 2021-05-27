@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['aws-news-env.eba-q8m9ifv2.us-west-2.elasticbeanstalk.com', '*'
 # Application definition
 
 INSTALLED_APPS = [
+    'newsapi',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +46,8 @@ INSTALLED_APPS = [
     'marketing',
     'orders',
     'advertise',
-    'storages',
+    
+    
 
 
 ]
@@ -192,7 +195,7 @@ STATICFILES_DIRS = [
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'news_portals.media-storages.MediaStorage'
 
 
 

@@ -18,6 +18,7 @@
 
     <!-- inject:css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/js.css' %}">
     <!-- endinject -->
     <link rel="stylesheet" href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}">
     <script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
@@ -49,7 +50,31 @@
 
   <!-- Register form -->
 
+  <script type="text/javascript">
+    /// some script
+    
+    // jquery ready start
+    $(document).ready(function() {
+      // jQuery code
+      var drop = document.getElementById('drop-p')
+      var readmore = document.getElementById('btn-p')
+      readmore.onclick = function() {
+        if (drop.style.display === 'none'){
+        drop.style.display = 'inline'
+        readmore.innerText = "Read Less"
+        
+        } else {
+          drop.style.display = 'none'
+          readmore.innerText = "Read More"
+        };
+
+      }; 
+    })
+    // jquery end
+    </script>
+
   {% include 'includes/footer.html' %}
+
 
   </body>
 

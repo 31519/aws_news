@@ -165,7 +165,7 @@ def change_profile(request):
 def dashboard(request):
     today = datetime.now()
     user =  request.user
-    profile = get_object_or_404(UserProfile, user=user)
+    # profile = get_object_or_404(UserProfile, user=user)
     adv = Advertise.objects.all().filter(user=user)
     user_profile = UserProfile.objects.all().filter(user=user)
     context = {

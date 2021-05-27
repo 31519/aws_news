@@ -93,26 +93,30 @@
                       <a class="nav-link" href="{% url 'local_news' %}">Local News</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/magazine.html' %}">MAGAZINE</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=Entertainment">Entertainment</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/business.html' %}">Business</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=Business">Business</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/sports.html' %}">Sports</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=Sports">Sports</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/art.html' %}">Art</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=General">General</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/politics.html' %}">POLITICS</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=Health">Health</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="{% static 'pages/travel.html' %}">Travel</a>
+                      <a class="nav-link" href="{% url 'business' %}?category=Science">Science</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'business' %}?category=Science">Technology</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="{% static 'pages/contactus.html' %}">Contact</a>
                     </li>
+                  
                   </ul>
                 </div>
               </div>
