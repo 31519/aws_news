@@ -10,29 +10,28 @@
               <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card bg-dark text-white">
                   <div class="text-center">
-                    <h2>Upload Advertise</h2>
+                    <h2>Publish Your News</h2>
                   </div>
                   <div class="card-body">
-                    <form action="{% url 'upload_advertise' %}" method="POST" enctype="multipart/form-data">
+                    <form action="{% url 'publish' %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="">
                       
-                        
+                        <label for="">Post Name</label>
+                        {{form.post_name}}
                         <label for="">Category</label>
-                        {{form.adv_category}}
+                        {{form.category}}
                         <br>
                         <label for="">Topic</label>
-                        {{form.adv_heading}}
+                        {{form.heading}}
                         <label for="">Descriptions</label>
-                        {{form.adv_descriptions}}
+                        {{form.description}}
                         <br>
                       
                         <label for="">Start Date</label>
-                        {{form.adv_start_date}}
-                        <label for="">end Date</label>
-                        {{form.adv_end_date}}
+                        {{form.published_date}}
                         <label for="">Photo</label> <br>
-                        {{form.adv_images}}
+                        {{form.images}}
                         <br>
                         <br>
                         <button type="submit" class="btn btn-success">Submit</button>
@@ -44,53 +43,47 @@
             </div>
 
 
-          <!-- View advertise -->
+
+
+             <!-- View advertise -->
           <div class="content-wrapper">
             <div class="container">
-                <div class="col-lg-12 col-12 stretch-card grid-margin">
+                <div class="col-lg-12        stretch-card grid-margin">
                     <div class="card">
-                      <div class="text-center">
-                        <h2>My Advertise</h2>
-                        <hr style="width: 100%; border: 3px solid black">
-                        <br>
-                      </div>
                         <div class="card-body">
-
                             <div class="row">
-                              {% for my in my_ads %}
+                              {% for p in post %}
                             <div class="col-sm-4 grid-margin">
                                 <div class="position-relative">
-                                <div class="rotate-img">
+                                <div class="">
                                     <img
-                                    src="{{my.adv_images.url}}"
+                                    src="{{p.images.url}}"
                                     alt="thumb"
                                     class="img-fluid"
                                     />
                                 </div>
                                 <div class="badge-positioned">
                                     <span class="badge badge-danger font-weight-bold"
-                                    >{{my.user.first_name}}</span
+                                    >Flash news</span
                                     >
                                 </div>
                                 </div>
                             </div>
                             <div class="col-sm-8  grid-margin">
                                 <h2 class="mb-2 font-weight-600">
-                                {{my.adv_heading}}-{{my.id}}
+                                {{p.heading}}
+                                {{p.id}}
                                 </h2>
                                 <div class="fs-13 mb-2">
-                                
                                 </div>
                                 <p class="mb-0">
-                                {{my.adv_descriptions}}
+                                {{p.description}}
                                 </p>
-                                <span class="mr-2">Start Date </span>{{my.adv_start_date}}
-                                <br>
-                                <span class="mr-2">End Date </span>{{my.adv_end_date}}
+                                <p>Start Date: {{p.published_date}} </p>
                             </div>
                             <div>
-                              <a href="{% url 'edit_advertise' my.id %}" class="btn btn-primary" style="font-size: 20px;">Edit</a>
-                              <a href="{% url 'delete_advertise' my.id %}" class="btn btn-primary" style="font-size: 20px;">Delete</a>
+                                <a href="{% url 'edit_publish' p.id %}" class="btn btn-primary" style="font-size: 20px;">Edit</a>
+                                <a href="{% url 'delete_publish' p.id %}" class="btn btn-primary" style="font-size: 20px;">Delete</a>
                             </div>
                             <hr style="width: 100%; border: 3px solid black">
 

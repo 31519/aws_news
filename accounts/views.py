@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from advertise.models import Advertise
 from datetime import datetime
 from django.contrib import messages
+from django.forms import modelformset_factory
+import requests
 # VERIFICATIONS EMAILS
 from django.contrib.sites.shortcuts import get_current_site# Create your views here.
 from django.template.loader import render_to_string
@@ -165,9 +167,12 @@ def change_profile(request):
 def dashboard(request):
     today = datetime.now()
     user =  request.user
+    
     # profile = get_object_or_404(UserProfile, user=user)
     adv = Advertise.objects.all().filter(user=user)
-    user_profile = UserProfile.objects.all().filter(user=user)
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    print(user_profile)
+    # return HttpResponse(user_profile.images)
     context = {
         'adv':adv,
         'date':today,
@@ -195,10 +200,11 @@ def logout(request):
 
 @login_required(login_url='login')
 def change_profile(request):
+
     user_profile = get_object_or_404(UserProfile, user=request.user)
     user = request.user
     if request.method == 'POST':
-        profile_form = UserProfileForm(request.POST, instance=user_profile)
+        profile_form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         user_form = UserForm(request.POST, instance=user)
 
         if profile_form.is_valid() and user_form.is_valid():
@@ -224,6 +230,8 @@ def change_profile(request):
 
 @login_required(login_url='login')
 def change_password(request):
+
+
     if request.method == 'POST':
         current = request.POST['current_password']
         new  = request.POST['new_password']
@@ -242,6 +250,8 @@ def change_password(request):
         else:
             messages.error(request, 'Password Change Not Complete')
             return redirect('change_password')
+
+        
     return render(request, 'account/change_password.html')
 
 

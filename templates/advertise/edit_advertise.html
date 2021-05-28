@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <div class="content-wrapper">
+          <h4>Edit Advertise</h4>
+          <div class="container">
+            <div class="row" data-aos="fade-up">
+              <div class="col-xl-12 stretch-card grid-margin">
+                <div class="card bg-dark text-white">
+                  <div class="card-body">
+                    <form action="{% url 'edit_advertise' ads.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="">
+                      
+                        
+                        <label for="">Category</label>
+                        {{form.adv_category}}
+                        <br>
+                        <label for="">Topic</label>
+                        {{form.adv_heading}}
+                        <label for="">Descriptions</label>
+                        {{form.adv_descriptions}}
+                        <br>
+                      
+                        <label for="">Start Date</label>
+                        {{form.adv_start_date}}
+                        
+                        <label for="">end Date</label>
+                        {{form.adv_end_date}}
+                        <label for="">Photo</label> <br>
+                        {{form.adv_images}}
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+{% endblock %}

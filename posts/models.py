@@ -34,6 +34,7 @@ class Posts(models.Model):
     heading = models.CharField(max_length=100, blank=True)
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
+    published_date = models.DateField(blank=True)
     images = models.ImageField(upload_to="images/posts/", default="images/posts/noimg.jpg")
 
 

@@ -26,7 +26,7 @@ class RegistrationForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('first_name', 'last_name', 'phone_number')
+        fields = ('first_name', 'last_name', 'phone_number', 'images')
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
@@ -36,6 +36,7 @@ class UserForm(forms.ModelForm):
 
 class UserProfileForm(forms.ModelForm):
     images = forms.ImageField(required=False, error_messages = {'invalid':("Image files only")}, widget=forms.FileInput)
+    
     class Meta:
         model = UserProfile
         fields = ('address', 'state', 'country', 'images', 'address')

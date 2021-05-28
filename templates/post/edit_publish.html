@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+        <div class="content-wrapper">
+          <div class="container">
+            <div class="row" data-aos="fade-up">
+              <div class="col-xl-12 stretch-card grid-margin">
+                <div class="card bg-dark text-white">
+                    <div class="text-center">
+                        <h2>Edit Publish</h2>
+                    </div>
+                  <div class="card-body">
+                    <form action="{% url 'edit_publish' post.id %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="">
+                      
+                        <label for="">Post Name</label>
+                        {{form.post_name}}
+                        <label for="">Category</label>
+                        {{form.category}}
+                        <br>
+                        <label for="">Topic</label>
+                        {{form.heading}}
+                        <label for="">Descriptions</label>
+                        {{form.description}}
+                        <br>
+                      
+                        <label for="">Start Date</label>
+                        {{form.published_date}}
+                        <label for="">Photo</label> <br>
+                        {{form.images}}
+                        <br>
+                        <br>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                      </div>
+                  </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+{% endblock %}

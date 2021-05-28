@@ -1,11 +1,16 @@
 from django.db import reset_queries
-from django.shortcuts import render
+from django.http.response import HttpResponse
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Posts
 from marketing.models import Signup
 from marketing.forms import SignupForm
 from newsapi import NewsApiClient
 import requests
 import json
+from advertise.models import Advertise
+from .forms import PostsForms
+from django.contrib.auth.decorators import login_required
+
 
 news_api = "d049a308e4634c8b8a28ce3b4b3059be"
 # Create your views here.
@@ -15,12 +20,10 @@ def home(request):
 
 
 def local_news(request):
-    url = f'https://newsapi.org/v2/top-headlines?country=us&apiKey={news_api}'
-    response = requests.get(url)
-    data = response.json()
-    article = data['articles']
+    ads = Advertise.objects.all()
+
     context = {
-        'article': article,
+        'ads': ads,
     }
     return render(request, 'post/local_news.html', context)
 
@@ -65,3 +68,57 @@ def post_detail(request, category_slug, post_slug):
         'posts': posts
     }
     return render(request, 'post/post_detail.html', context)
+
+
+@login_required(login_url='login')
+def publish(request):
+    post = Posts.objects.all()
+    if request.method == 'POST':
+        form = PostsForms(request.POST, request.FILES)
+        if form.is_valid():
+            post = Posts()
+            post.category = form.cleaned_data['category']
+            post.description = form.cleaned_data['description']
+            post.heading = form.cleaned_data['heading']
+            post.images = form.cleaned_data['images']
+            post.post_name = form.cleaned_data['post_name']
+            post.published_date = form.cleaned_data['published_date']
+
+            post.save()
+            return redirect('publish')
+        else:
+            return HttpResponse("Error")
+    else:
+        form = PostsForms()
+
+    context = {
+        'form':form,
+        'post':post
+    }
+    return render(request, 'post/publish.html', context)
+
+@login_required(login_url='login')
+def edit_publish(request, p_id):
+    post = get_object_or_404(Posts, id=p_id)
+    if request.method == 'POST':
+        form = PostsForms(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('publish')
+        else:
+            return redirect('publish')
+    else:
+        form = PostsForms(instance=post)
+    context = {
+        'form':form,
+        'post':post
+    }
+    return render(request, 'post/edit_publish.html', context)
+
+
+@login_required(login_url='login')
+def delete_publish(request, p_id):
+    post = get_object_or_404(Posts, id=p_id)
+    post.delete()
+
+    return redirect('publish')

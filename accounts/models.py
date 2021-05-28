@@ -50,6 +50,8 @@ class Account(AbstractBaseUser):
     country          = models.CharField(max_length=200)
     state            = models.CharField(max_length=200)
     phone_number     = models.IntegerField(blank=True, null=True)
+    images           = models.ImageField(blank=True, default='profile.svg', upload_to='userprofile')
+
     gender           = models.CharField(max_length=200, choices=my_gender)
 
     # required field
