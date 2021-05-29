@@ -70,6 +70,33 @@
 
       }; 
     })
+
+
+    // World Clock
+    let clock = () => {
+      let date = new Date();
+      let hrs = date.getHours();
+      let mint = date.getMinutes();
+      let sec = date.getSeconds();
+      let period = 'AM'
+      if (hrs == 0) hrs =12
+  
+      if (hrs > 12) {
+        hrs = hrs - 12
+        period = 'PM'
+      }
+      hrs = hrs < 10 ? 0 + hrs : hrs;
+      mint = mint < 10 ? 0 + mint : mint;
+      sec = sec < 10 ? 0 + sec : sec;
+
+      let time = `${hrs}:${mint}:${sec}:${period}`
+      document.getElementById('clock').innerText = time
+      setInterval(clock, 1000)
+    }
+    clock()
+    
+    
+
     // jquery end
     </script>
 

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+  
+
+{% block content %}
+    <div class="container-scroller">
+      <!-- partial -->
+
+      <div class="content-wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card" data-aos="fade-up">
+                <div class="card-body">
+                  <div class="aboutus-wrapper">
+                    <h1 class="mt-5">
+                      About Us
+                    </h1>
+                    {% for abouts in about %}
+                    <hr style="border:3px solid red">
+                    <div class="text-center">
+                      <p class="font-weight-600 fs-15">
+                      {{abouts.description}}
+                      </p>
+                      <p class="font-weight-600 fs-15 mb-5 mt-4">
+                        {{abouts.address}}
+                      </p>
+                      <img
+                        src="{{abouts.images.url}}"
+                        alt="banner"
+                        class="img-fluid mb-5"
+                        style="width: 200px; height: 200px; border-radius:50%"
+                      />
+                    </div>
+                    {% endfor %}
+                    
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- container-scroller ends -->
+{% endblock %}

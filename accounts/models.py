@@ -91,4 +91,12 @@ class UserProfile(models.Model):
         return self.user.first_name
         
 
+class WriteToUs(models.Model):
+    email = models.EmailField()
+    text  = models.TextField()
+    date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
 

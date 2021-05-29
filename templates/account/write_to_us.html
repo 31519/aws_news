@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y" style="background:rgb(191, 206, 211)">
+
+    <!-- ============================ COMPONENT LOGIN   ================================= -->
+
+<div class="container mx-auto alert text-center" role="alert" style="max-width: 1024px; margin-top:10px;">
+
+    <br><br>
+    
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">
+            {{message}}
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <br>
+    
+</div>
+
+        <div class="card mx-auto text-center" style="max-width: 380px; margin-top:1px;">
+          <div class="card-body">
+          <h4 class="card-title mb-4">Write to Us</h4>
+          <form action="{% url 'write_to_us' %} " method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                  <label for="">Email</label>
+                 <input type="email" class="form-control" placeholder="Email Address" name="email">
+              </div> <!-- form-group// -->
+              <div class="form-group">
+                <label for="">Your Thought</label>
+                <textarea type="text" class="form-control" placeholder="Write to Us" name="text"></textarea>
+             </div> <!-- form-group// -->
+             <div class="">
+                 <input type="submit" value="Submit" class="btn btn-success">
+             </div>
+  
+          </form>
+          </div> <!-- card-body.// -->
+        </div> <!-- card .// -->
+    
+         <p class="text-center mt-4">Don't have account? <a href="{% url 'register' %}">Sign up</a></p>
+         <br><br>
+    <!-- ============================ COMPONENT LOGIN  END.// ================================= -->
+    
+
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock %}

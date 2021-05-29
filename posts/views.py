@@ -10,6 +10,7 @@ import json
 from advertise.models import Advertise
 from .forms import PostsForms
 from django.contrib.auth.decorators import login_required
+from about_us.models import AboutUs
 
 
 news_api = "d049a308e4634c8b8a28ce3b4b3059be"
@@ -122,3 +123,15 @@ def delete_publish(request, p_id):
     post.delete()
 
     return redirect('publish')
+
+
+
+
+def about_us(request):
+    aboutus= AboutUs.objects.all()
+
+
+    context = {
+        'about':aboutus
+    }
+    return render(request, 'post/about_us.html', context)

@@ -1,6 +1,7 @@
 from decimal import Context
+from django.db.models.fields import EmailField
 from django.http.response import HttpResponse
-from accounts.models import Account, UserProfile
+from accounts.models import Account, UserProfile, WriteToUs
 from accounts.forms import RegistrationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -253,6 +254,33 @@ def change_password(request):
 
         
     return render(request, 'account/change_password.html')
+
+
+
+def write_to_us(request):
+    user =  request.user
+    if request.method == 'POST':
+        email = request.POST['email']
+        text = request.POST['text']
+        data = WriteToUs()
+        data.email = email
+        data.text = text
+        user_name = email.split('@')[0]
+        print(user_name)
+        data.save()
+
+        # Sending email to them
+        subject = 'Thank you for writing to us'
+        to_email = email
+        message = render_to_string('email/write_to_us.html', {
+            'user_name':user_name
+        })
+        send_to = EmailMessage(subject, message, to=[to_email, 'cosrumut31519@gmail.com', 'johnsumer0@gmail.com', 'johnysumer2018@gmail.com'])
+        send_to.send()
+        return redirect('write_to_us')
+
+    else:
+        return render(request, 'account/write_to_us.html')
 
 
 

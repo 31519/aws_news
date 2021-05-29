@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'marketing',
     'orders',
     'advertise',
+    'about_us'
     
     
 
