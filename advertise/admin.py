@@ -8,7 +8,12 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 class AdvertiseAdmin(admin.ModelAdmin):
     prepopulated_fields={'slug': ('adv_heading',)}
+    # fields = ['user', 'adv_category', 'adv_heading', 'slug', 'adv_descriptions', 'adv_images', 'adv_conclude', 'adv_created_date', 'adv_updated_date', 'adv_start_date' 'adv_end_date']
+    readonly_fields = ['adv_created_date', 'adv_updated_date']
     class Meta:
         model = Advertise
 admin.site.register(Categories, CategoriesAdmin)
 admin.site.register(Advertise, AdvertiseAdmin)
+
+
+    

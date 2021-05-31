@@ -2,6 +2,8 @@ from django.db import models
 
 from django.utils.text import slugify
 from django.urls import reverse
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 # Create your models here.
 class Category(models.Model):
     category_name = models.CharField(max_length=100, unique=True)
@@ -47,3 +49,9 @@ class Posts(models.Model):
 
     def get_url(self):
         return reverse('post_detail', args=[self.category.slug, self.slug])
+
+
+def pre_posts_save(instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.post_name)
+pre_save.connect(pre_posts_save, sender=Posts)

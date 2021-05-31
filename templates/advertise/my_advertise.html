@@ -6,7 +6,9 @@
 
         <div class="content-wrapper">
           <div class="container">
+            {% include 'includes/alert.html' %}
             <div class="row" data-aos="fade-up">
+              
               <div class="col-xl-12 stretch-card grid-margin">
                 <div class="card bg-dark text-white">
                   <div class="text-center">
@@ -60,37 +62,35 @@
                               {% for my in my_ads %}
                             <div class="col-sm-4 grid-margin">
                                 <div class="position-relative">
-                                <div class="rotate-img">
+                                <div class="">
                                     <img
                                     src="{{my.adv_images.url}}"
                                     alt="thumb"
                                     class="img-fluid"
+                                    style="width:150px; height:150px;"
                                     />
                                 </div>
                                 <div class="badge-positioned">
-                                    <span class="badge badge-danger font-weight-bold"
+                                    <span class="badge badge-danger "
                                     >{{my.user.first_name}}</span
                                     >
                                 </div>
                                 </div>
                             </div>
                             <div class="col-sm-8  grid-margin">
-                                <h2 class="mb-2 font-weight-600">
-                                {{my.adv_heading}}-{{my.id}}
+                                <h2 class=" font-weight-400">
+                                {{my.adv_heading}}
                                 </h2>
-                                <div class="fs-13 mb-2">
                                 
-                                </div>
                                 <p class="mb-0">
                                 {{my.adv_descriptions}}
                                 </p>
-                                <span class="mr-2">Start Date </span>{{my.adv_start_date}}
                                 <br>
-                                <span class="mr-2">End Date </span>{{my.adv_end_date}}
+                                <p><h6 class="mr-2">Post On: {{my.adv_created_date}} </h6></p>
                             </div>
                             <div>
                               <a href="{% url 'edit_advertise' my.id %}" class="btn btn-primary" style="font-size: 20px;">Edit</a>
-                              <a href="{% url 'delete_advertise' my.id %}" class="btn btn-primary" style="font-size: 20px;">Delete</a>
+                              <a href="{% url 'delete_advertise' my.id %}" onclick="alert('Are you sure you want to delete this')" class="btn btn-primary" style="font-size: 20px;">Delete</a>
                             </div>
                             <hr style="width: 100%; border: 3px solid black">
 

@@ -19,7 +19,7 @@
                   <a href="{% url 'upload_advertise' %}" class="nav-link">Put your Advertise</a>
                 </li>
                 <li class="nav-item">
-                  <a href="{% url 'about_us' %}" class="nav-link">About</a>
+                  <a href="{% url 'about_us' %}" class="nav-link">About Us</a>
                 </li>
                 <li class="nav-item">
                   <a href="{% url 'write_to_us' %}" class="nav-link">Write to Us</a>
@@ -37,7 +37,7 @@
                     <a href="{% url 'dashboard' %}" class="nav-link">| Dashboard |</a>
                   </li>
                   <li class="nav-item">
-                     <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                     <a href="{% url 'logout' %}" onclick="alert('Are you sure you want to logout')" class="nav-link">Logout</a>
                   </li>
                 {% else %}
                   <li class="nav-item">
@@ -82,6 +82,32 @@
                         <i class="mdi mdi-close"></i>
                       </button>
                     </li>
+                    {% if user.id  %}
+                    <a class="text-white" href=""> welcome {{user.first_name}} </a>
+                    
+                    <li class="nav-item">
+                      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                      <a href="{% url 'login' %}" onclick="alert('Are you sure you want to logout')" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'register' %}" class="nav-link">Register</a>
+                    </li>
+
+                    {% endif %}
+                    {% if user.is_admin %}
+                    <li class="nav-item">
+                      <a href="{% url 'publish' %}" class="nav-link">Publish News</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="{% url 'refresh' %}" class="nav-link">Refresh Ads</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item active">
                       <a class="nav-link" href="{% static 'index.html' %}">Home</a>
                     </li>
@@ -112,29 +138,7 @@
                     <li class="nav-item">
                       <a href="{% url 'upload_advertise' %}" class="nav-link">Put your Advertise</a>
                     </li>
-                    {% if user.id  %}
-                    <a class="text-white" href=""> welcome {{user.first_name}} </a>
                     
-                    <li class="nav-item">
-                      <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{% url 'logout' %}" class="nav-link">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                      <a href="{% url 'login' %}" class="nav-link">Login</a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="{% url 'register' %}" class="nav-link">Register</a>
-                    </li>
-
-                    {% endif %}
-                    {% if user.is_admin %}
-                    <li class="nav-item">
-                      <a href="{% url 'publish' %}" class="nav-link">Poblish News</a>
-                    </li>
-                    {% endif %}
                   
                   </ul>
                 </div>
@@ -162,20 +166,59 @@
       </div>
     </header>
 
+    <div class="flash-news-banner">
+      <div class="container">
+        <div class=" align-items-center ">
+        <!-- <div class="d-lg-flex align-items-center justify-content-between"> -->
+          <div class="col-12 ">
+            <div class="row">
+              <!-- <div class="col-12 bg-light text-light d-flex justify-content-around collapse "> -->
+              <div class="col-12 bg-light text-light d-flex justify-content-around collapse pr-2 pl-2">
+                
+                  
+                <a class="btn btn-alert" href="{% url 'local_news' %}">Local-News</a>
+              
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Entertainment">Entertainment</a>
+              
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Business">Business</a>
+              
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Sports">Sports</a>
+              
+
+              </div>
+            
+              <div class="col-12 bg-light text-light d-flex justify-content-around collapse pr-2 pl-2 ">
+                <a class="btn btn-alert" href="{% url 'business' %}?category=General">General</a>
+                
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Health">Health</a>
+              
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Science">Science</a>
+              
+                <a class="btn btn-alert" href="{% url 'business' %}?category=Science">Technology</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- partial -->
     <div class="flash-news-banner">
       <div class="container">
-        <div class="d-lg-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
-            <span class="badge badge-dark mr-3">Local</span>
-            <p class="mb-0">
-              Get instance news
-            </p>
+        <div class="row">
+          <div class="d-flex align-items-end justify-content-between col-lg-12 col-12">
+            <div class="col-4 d-flex justify-content-start">
+              <span class="badge badge-dark"><a class="" href="{% url 'local_news' %}">Local News</a></span>
+            </div>
+            
+            <div class="col-4 d-flex justify-content-start pr-2 mr-2">
+              <span class="badge badge-dark"><a class="" href="{% url 'view_advertise' %}">View Advertise</a></span> 
+            </div>
+            <div class="col-4 ">
+              <span class="badge badge-dark" ass=" text-dark time" id="clock">Wed, March 4, 2020</span>
+              <br>
+              <!-- <h5 class="text-danger" id="date">Dates</h5> -->
+            </div>
           </div>
-          <div class="d-flex">
-            <span class="mr-3 text-dark time" id="clock">Wed, March 4, 2020</span>
-            <span class="text-danger"></span>
-          </div>
+          
         </div>
       </div>
     </div>

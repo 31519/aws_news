@@ -66,12 +66,11 @@ def register(request):
             profile.images = 'default/default-user.jpg'
             profile.save()
 
-            messages.success (request, f"your account {user.username} has been create successfully")
-
-
+            messages.success(request, "Your Account has been create successfully")
             return redirect('login')
         else:
-            return HttpResponse("hi")
+            messages.error(request, "Invalid credential!")
+            return redirect('register')
 
             
     else:
@@ -120,7 +119,8 @@ def forgot_password(request):
         
 
         else:
-            return redirect('account/forgot_password.html')
+            messages.error(request, "We could not find your email! ")
+            return redirect('forgot_password')
     return render(request, 'account/forgot_password.html')
 
 def reset_password_email(request, uidb64, token):
@@ -135,14 +135,12 @@ def reset_password_email(request, uidb64, token):
     print("try and excepy")
     if user is not None and default_token_generator.check_token(user, token):
         request.session['uid'] = uid
-
-        messages.success(request, "Reset Your password")
         return redirect('reset_my_password')
 
     else:
-        return HttpResponse("hi")
-        exit()
-        return redirect('login')
+        messages.error(request, "Invalid token! ")
+        return redirect('forgot_password')
+        
 
 def reset_my_password(request):
     if request.method == 'POST':
@@ -246,10 +244,10 @@ def change_password(request):
                 messages.success(request, 'Password Change Successfully')
                 return redirect('dashboard')
             else:
-                messages.error(request, 'Invalic Current Password!')
+                messages.error(request, 'Could not find your current password !')
                 return redirect('change_password')
         else:
-            messages.error(request, 'Password Change Not Complete')
+            messages.error(request, 'New and confirm password must be the same!')
             return redirect('change_password')
 
         
@@ -275,12 +273,16 @@ def write_to_us(request):
         message = render_to_string('email/write_to_us.html', {
             'user_name':user_name
         })
-        send_to = EmailMessage(subject, message, to=[to_email, 'cosrumut31519@gmail.com', 'johnsumer0@gmail.com', 'johnysumer2018@gmail.com'])
+        send_to = EmailMessage(subject, message, to=[to_email, 'cosrumut31519@gmail.com'])
         send_to.send()
+        messages.success(request, "Thank You, Hope you have a nice day")
         return redirect('write_to_us')
 
     else:
+        # messages.error(request, "Sorry, There is an error")
         return render(request, 'account/write_to_us.html')
+
+    # return render(request, 'account/write_to_us.html')
 
 
 

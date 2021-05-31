@@ -27,6 +27,7 @@
 </div>
 
         <div class="card mx-auto text-center" style="max-width: 380px; margin-top:1px;">
+            {% include 'includes/alert.html' %}
           <div class="card-body">
           <h4 class="card-title mb-4">Write to Us</h4>
           <form action="{% url 'write_to_us' %} " method="POST">

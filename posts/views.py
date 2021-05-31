@@ -11,6 +11,7 @@ from advertise.models import Advertise
 from .forms import PostsForms
 from django.contrib.auth.decorators import login_required
 from about_us.models import AboutUs
+from django.contrib import messages
 
 
 news_api = "d049a308e4634c8b8a28ce3b4b3059be"
@@ -22,14 +23,16 @@ def home(request):
 
 def local_news(request):
     ads = Advertise.objects.all()
+    posts = Posts.objects.all()
 
     context = {
         'ads': ads,
+        'posts':posts
     }
     return render(request, 'post/local_news.html', context)
 
 def business(request):
-
+    ads = Advertise.objects.all().order_by('-adv_created_date')
     category = request.GET.get('category')
 
     
@@ -54,7 +57,8 @@ def business(request):
     
     context = {
         'article': article,
-        'top_headline':top_headline
+        'top_headline':top_headline,
+        'ads':ads
     }
         
     
@@ -86,9 +90,11 @@ def publish(request):
             post.published_date = form.cleaned_data['published_date']
 
             post.save()
+            messages.success(request, "Successfully Upload Your Post")
             return redirect('publish')
         else:
-            return HttpResponse("Error")
+            messages.error(request, "Failed to Upload Your Post")
+            return redirect('publish')
     else:
         form = PostsForms()
 
@@ -96,6 +102,7 @@ def publish(request):
         'form':form,
         'post':post
     }
+    
     return render(request, 'post/publish.html', context)
 
 @login_required(login_url='login')
@@ -105,8 +112,10 @@ def edit_publish(request, p_id):
         form = PostsForms(request.POST, request.FILES, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Successfully Edited your Post")
             return redirect('publish')
         else:
+            messages.error(request, "Failed to Edited your Post")
             return redirect('publish')
     else:
         form = PostsForms(instance=post)
@@ -114,6 +123,7 @@ def edit_publish(request, p_id):
         'form':form,
         'post':post
     }
+    
     return render(request, 'post/edit_publish.html', context)
 
 
@@ -121,6 +131,7 @@ def edit_publish(request, p_id):
 def delete_publish(request, p_id):
     post = get_object_or_404(Posts, id=p_id)
     post.delete()
+    messages.success(request, "Successfully Deleted Your Post")
 
     return redirect('publish')
 
