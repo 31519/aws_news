@@ -1,6 +1,6 @@
-from decimal import Context
-from django.db.models.fields import EmailField
-from django.http.response import HttpResponse
+# from decimal import Context
+# from django.db.models.fields import EmailField
+# from django.http.response import HttpResponse
 from accounts.models import Account, UserProfile, WriteToUs
 from accounts.forms import RegistrationForm
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,14 +13,16 @@ from advertise.models import Advertise
 from datetime import datetime
 from django.contrib import messages
 from django.forms import modelformset_factory
-import requests
+
 # VERIFICATIONS EMAILS
 from django.contrib.sites.shortcuts import get_current_site# Create your views here.
 from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
-from django.core.mail import EmailMessage, send_mail
+from django.core.mail import EmailMessage
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def register(request):
@@ -58,9 +60,11 @@ def register(request):
             print("activate email3")
             
                 # 'token':default_token_generator.make_token(user),
-            to_email = email
+            to_email =[email,]
             print("activate email4")
-            send_mail = EmailMessage(subject, message, to=[to_email])
+            from_email = settings.EMAIL_HOST_USER
+            # send_mail = EmailMessage(subject, message, to=[to_email])
+            send_mail(subject, message, from_email,  to_email)
             print("activate email5")
             send_mail.send()
             print("finished activate email")
@@ -280,12 +284,14 @@ def write_to_us(request):
 
         # Sending email to them
         subject = 'Thank you for writing to us'
-        to_email = email
+        to_email = [email,]
         message = render_to_string('email/write_to_us.html', {
             'user_name':user_name
         })
-        send_to = EmailMessage(subject, message, to=[to_email, 'cosrumut31519@gmail.com'])
-        send_to.send()
+        # from_email = settings.EMAIL_HOST_USER
+        from_email = 'markospale31519@gmial.com'
+        # send_mail = EmailMessage(subject, message, to=[to_email])
+        send_mail(subject, message, from_email, to_email)
         messages.success(request, "Thank You, Hope you have a nice day")
         return redirect('write_to_us')
 
