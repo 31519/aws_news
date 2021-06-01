@@ -46,18 +46,24 @@ def register(request):
             
             
             current_site  = get_current_site(request)
-            
+            print("activate email1")
             subject = ("Please Activate your Account")
+            print("activate email2")
             message = render_to_string('email/activate.html', {
                 'user':user,
                 'domain':current_site,
                 'uid':urlsafe_base64_encode(force_bytes(user.pk)),
-                'token':default_token_generator.make_token(user),
 
             })
+            print("activate email3")
+            
+                # 'token':default_token_generator.make_token(user),
             to_email = email
+            print("activate email4")
             send_mail = EmailMessage(subject, message, to=[to_email])
+            print("activate email5")
             send_mail.send()
+            print("finished activate email")
             # send_mail(subject, message, to_email)
             
             user.save()
@@ -87,10 +93,11 @@ def activate(request, uidb64, token):
     except (TypeError, ValueError, OverflowError, Account.DoesNotExist):
         user=None
 
-    if user is not None and default_token_generator.check_token(user,token):
+    if user is not None:
+        # and default_token_generator.check_token(user,token)
         user.is_active = True
         user.save()
-        messages.success(request, 'Registering successful')
+        messages.success(request, 'Your Account has been create successfully')
         return redirect('login')
     else:
         messages.error('Error in registering')
@@ -185,9 +192,13 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(email=email, password=password)
         if user is not None:
+
             auth.login(request, user)
+            messages.success(request, "Successfully Loged in")
             return redirect('dashboard')
+
         else:
+            messages.error(request, "Invalid credential !")
             return redirect('login')
     return render(request, 'account/login.html')
 

@@ -89,11 +89,11 @@
                       <a href="{% url 'dashboard' %}" class="nav-link">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                      <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                      <a href="{% url 'logout' %}" onclick="alert('Are you sure you want to logout')" class="nav-link">Logout</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                      <a href="{% url 'login' %}" onclick="alert('Are you sure you want to logout')" class="nav-link">Login</a>
+                      <a href="{% url 'login' %}"  class="nav-link">Login</a>
                     </li>
                     <li class="nav-item">
                       <a href="{% url 'register' %}" class="nav-link">Register</a>
@@ -176,7 +176,7 @@
               <div class="col-12 bg-light text-light d-flex justify-content-around collapse pr-2 pl-2">
                 
                   
-                <a class="btn btn-alert" href="{% url 'local_news' %}">Local-News</a>
+                <a class="btn btn-alert" href="{% url 'local_news' %}">Local News</a>
               
                 <a class="btn btn-alert" href="{% url 'business' %}?category=Entertainment">Entertainment</a>
               

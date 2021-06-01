@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'posts',
-    'marketing',
     'orders',
     'advertise',
     'about_us'
@@ -55,9 +54,6 @@ INSTALLED_APPS = [
 
 
 
-MAILCHIMP_API_KEY = '6aea3493091a35ef60074e755a1887b8-us6'
-MAILCHIMP_DATA_CENTER = 'us6'
-MAIL_CHIMP_EMAIL_LIST_ID ='61cc6bb402'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

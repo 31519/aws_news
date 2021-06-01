@@ -2,8 +2,6 @@ from django.db import reset_queries
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Posts
-from marketing.models import Signup
-from marketing.forms import SignupForm
 from newsapi import NewsApiClient
 import requests
 import json

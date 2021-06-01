@@ -16,6 +16,17 @@ class RegistrationForm(forms.ModelForm):
         model = Account
         fields = ['first_name', 'last_name', 'email', 'phone_number', 'country', 'state', 'gender', 'password']
 
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        # self.fields['adv_category'].widget.attrs['placeholder'] = 'Enter Category'
+        # self.fields['adv_heading'].widget.attrs['placeholder'] = 'Enter Title'
+        # self.fields['adv_descriptions'].widget.attrs['placeholder'] = 'Enter Description'
+        # self.fields['adv_images'].widget.attrs['placeholder'] = 'Enter Images'
+        # self.fields['adv_end_date'].widget.attrs['class'] = 'form-control'
+        
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'form-control'
+
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
         password = cleaned_data.get('password')

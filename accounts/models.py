@@ -44,10 +44,10 @@ my_gender = (
 
 class Account(AbstractBaseUser):
     first_name       = models.CharField(max_length=200, unique=True)
-    last_name        = models.CharField(max_length=200, unique=True)
-    username         = models.CharField(max_length=200, unique=True)
+    last_name        = models.CharField(max_length=200)
+    username         = models.CharField(max_length=200)
     email            = models.EmailField(max_length=200, unique=True)
-    country          = models.CharField(max_length=200)
+    country          = models.CharField(max_length=200, blank=True)
     state            = models.CharField(max_length=200)
     phone_number     = models.IntegerField(blank=True, null=True)
     images           = models.ImageField(blank=True, default='profile.svg', upload_to='userprofile')
@@ -81,7 +81,7 @@ class Account(AbstractBaseUser):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    user = models.OneToOneField(Account, on_delete=models.CASCADE, db_constraint=False)
     address = models.CharField(max_length=200, blank=True)
     state = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
