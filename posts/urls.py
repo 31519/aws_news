@@ -9,7 +9,6 @@ urlpatterns = [
     path('post_detail/<slug:category_slug>/<slug:post_slug>/', views.post_detail, name='post_detail'),
 
     # email
-    # path('email_list_signup/', email_list_signup, name='email_list_signup'),
     path('edit_publish/<int:p_id>/', views.edit_publish, name='edit_publish'),
     path('delete_publish/<int:p_id>/', views.delete_publish, name='delete_publish'),
     path('about_us/', views.about_us, name='about_us'),
