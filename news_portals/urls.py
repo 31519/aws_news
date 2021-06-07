@@ -23,6 +23,8 @@ urlpatterns = [
     path('', include('posts.urls')),
     path('register/', include('accounts.urls')),
     path('advertise/', include('advertise.urls')),
+    path('payments/', include('payments.urls')),
+    path('ajax/', include('ajax.urls')),
 
 
 ]

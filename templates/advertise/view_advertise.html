@@ -7,6 +7,7 @@
  <div class="content-wrapper">
     <div class="container">
         <div class="col-lg-12 col-12 stretch-card grid-margin">
+            {% include 'includes/alert.html' %}
             <div class="card">
               <div class="text-center">
                 <h2>My Advertise</h2>
@@ -20,9 +21,9 @@
                     <div class="col-sm-4 grid-margin">
                         <div class="position-relative">
                         <div class="">
-                            <a href="{% url 'advertise_view' my.id %}">
+                            <a href="{% url 'advertise_view' my.advertise.id %}">
                             <img
-                            src="{{my.adv_images.url}}"
+                            src="{{my.advertise.adv_images.url}}"
                             alt="thumb"
                             class="img-fluid"
                             style="width:100px; height:100px;"
@@ -37,18 +38,19 @@
                         </div>
                     </div>
                     <div class="col-sm-8  grid-margin">
-                        <a href="{% url 'advertise_view' my.id %}"><h2 class=" font-weight-400">
-                        {{my.adv_heading}}
+                        <a href="{% url 'advertise_view' my.advertise.id %}"><h2 class=" font-weight-400">
+                        {{my.advertise.adv_heading}}
                         </h2>
                         </a>
                         
                         <p class="mb-0">
-                        {{my.adv_descriptions}}
+                        {{my.advertise.adv_descriptions}}
                         </p>
                         <br>
-                        <p><h6 class="mr-2">Post On: {{my.adv_created_date}} </h6></p>
+                        <p><h6 class="mr-2">Post On: {{my.advertise.adv_created_date}} </h6></p>
                         
                     </div>
+                    
                     
                     <hr style="width: 100%; border: 1px solid black">
 

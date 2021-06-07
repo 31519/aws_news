@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title>jquery</title>
+
+    <!-- <script src="jquery-3.5.1.min.js"></script>
+    <script src="jquery-3.5.1.min.js"></script> -->
+
+
+	<!-- <script
+	src="https://code.jquery.com/jquery-3.6.0.min.js"">
+	</script> -->
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="Flash Able Bootstrap admin template made using Bootstrap 4 and it has huge amount of ready made feature, UI components, pages which completely fulfills any dashboard needs." />
+	<meta name="keywords"
+		content="admin templates, bootstrap admin templates, bootstrap 4, dashboard, dashboard templets, sass admin templets, html admin templates, responsive, bootstrap admin templates free download,premium bootstrap admin templates, Flash Able, Flash Able bootstrap admin template">
+	<meta name="author" content="Codedthemes" />
+	
+	<link rel="stylesheet" href="style.css" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+
+<body>
+	
+
+        
+    <div class="container">
+        <h1>this is the one to hide</h1>
+    </div>
+    <h1>My bud my love my dark my regret my soul</h1>
+    <ul class="ul" id="ul">
+        <li>{{number.name}}</li>
+        <li>{{user.first_name}}</li>
+        <li>{{number.number}}</li>
+    </ul>
+      
+        <div>  
+            <div class="col-6">
+
+                <h3 class="num">Num: {{number.number}}</h3>
+                <h3>User: {{user}}</h3>
+                <h3>Name: {{number.name}}</h3>
+            </div>
+            <div class="col-6">
+                <form method="POST" id="post-form" action="{% url 'create'  %}">
+                    {%csrf_token%}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            
+        </div>
+
+    </div>
+
+
+<!-- <ul>
+    <h1>This is the data</h1>
+    <ul id="data">
+        <li>Hi</li>
+
+	</ul>
+    <ul id="datas">
+        hi
+    </ul>
+</ul>
+
+
+	<div class="images">
+		<img id="one" src="images/mages4.jpg" alt="images1">
+		<img id="two" src="images/images2.jpg" alt="images3">
+		<img id="three" src="images/images3.jpg" alt="images2">
+	</div>
+
+	<button class="button" id="bye">Bye</button>
+	<button class="button" id="show">Show</button>
+	 -->
+
+	<!-- Ajax -->
+	<!-- <form action="" class="form-product-add-ajax"></form> -->
+    <!-- success: function(response){
+        $('#data').empty();
+        for (var key in response.profiles){
+            var temp = "<li>" + response.profiles[key].name + "</li>"
+            $('#data').append(temp);
+            $('#datas').html("datas");
+            console.log("finish")
+
+        }
+    }, -->
+
+<!-- ) -->
+
+<!-- $(document).on('submit', '#post-form',function(e){
+    e.preventDefault()
+
+  
+  
+    $.ajax({
+        type:'POST',
+        url:"{% url 'create' %}",
+        data:{
+            name:$('#name').val(),
+            number:$('#number').val(),
+            csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+        },
+        success: function(data){
+            console.log("new data created successfully ")
+            alert("new data created successfully ")
+        }
+    }); -->
+
+
+	<script>
+
+		$(document).on('submit', '#post-form',function(e){
+            e.preventDefault()
+
+            var thisForm = $('#post-form')
+            var actionEndpoint = thisForm.attr("action");
+            var httpMethod = thisForm.attr("method");
+            var formData = thisForm.serialize();
+        
+            
+          
+          
+            $.ajax({
+                url:actionEndpoint,
+                method: httpMethod,
+                data:formData,
+                success: function(data){
+                    console.log("new data created successfully ")
+                    console.log(data.add)
+                    console.log(data.num)
+                    var number = $(".num")
+                    number.text(data.num)
+                    
+                },
+                error: function(errorData){
+                    console.log("error")
+                    console.log(errorData)
+                }
+            });
+            $.ajax({
+                url:"/again/",
+                type:"GET",
+                data:{},
+                success: function(data){
+                    console.log(data);
+                    console.log("success");
+
+                    
+
+                },
+                error: function(error){
+                    console.log(error);
+                    console.log("error")
+
+                }
+            })
+
+
+        })
+     
+            
+
+        
+
+        
+
+
+
+		
+	</script>
+	<!-- <style>
+		.styleclass {
+			border: 5px solid green;
+		}
+	</style>
+	<input type="text" id="sometext" value="">
+	<button >Addclass</button>
+     -->
+
+</body>
+
+</html>
+
+

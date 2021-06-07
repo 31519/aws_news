@@ -1,4 +1,6 @@
 import datetime
+from typing import Tuple
+from django.contrib.auth.models import User
 from django.db import models
 from accounts.models import Account
 from django.urls import reverse
@@ -26,6 +28,19 @@ def pre_cat_slug(instance, *args, **kwargs):
 
 pre_save.connect(pre_cat_slug, sender=Categories)
 
+
+# PLAN_CHOICES = (
+#     ('Free', 'Free'),
+#     ('Weeks', 'Weeks'),
+#     ('Month', 'Month'),
+# )
+PLAN_CHOICES = (
+    (1000, 'Free'),
+    (5000, 'Weeks'),
+    (15000, 'Month'),
+)
+
+
 class Advertise(models.Model):
     adv_category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -42,6 +57,8 @@ class Advertise(models.Model):
 
     adv_datetime_now = models.DateTimeField(default=datetime.now())
     adv_display = models.BooleanField(default=True)
+    adv_plan = models.IntegerField(max_length=200, choices=PLAN_CHOICES, default='Free')
+    adv_order_number = models.IntegerField(blank=True, default=0)
 
     # def timeperiod(self):
     #     from datetime import datetime, timedelta
@@ -67,3 +84,14 @@ def pre_slug(instance, *args, **kwargs):
         instance.slug = slugify(instance.adv_category)
 
 pre_save.connect(pre_slug, sender=Advertise)
+
+class Ads_Payment(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    advertise = models.ForeignKey(Advertise, on_delete=models.CASCADE)
+    order_number = models.IntegerField(blank=True, null=True)
+    active = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now=True)
+    adv_plan = models.IntegerField(max_length=200, choices=PLAN_CHOICES, default='Free')
+
+    def __str__(self):
+        return self.user.first_name

@@ -1,9 +1,14 @@
 from django import forms
 from django.forms.widgets import DateInput
 
-from .models import Advertise
+from .models import Advertise, Ads_Payment
 
 
+# class AdsPaymentForm(forms.ModelForm):
+
+#     class Meta:
+#         model = Ads_Payment
+#         fields = ['adv_plan']
 
 
 class DateInput(forms.DateInput):
@@ -14,7 +19,7 @@ class AdvertiseForm(forms.ModelForm):
 
     class Meta:
         model = Advertise
-        fields = ['adv_category', 'adv_heading', 'adv_descriptions', 'adv_images', 'adv_start_date', 'adv_end_date']
+        fields = ['adv_category', 'adv_heading', 'adv_descriptions', 'adv_images', 'adv_start_date', 'adv_end_date', 'adv_plan']
         widgets = {'adv_start_date': DateInput(),
                     'adv_end_date': DateInput()
         }

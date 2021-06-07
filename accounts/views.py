@@ -62,10 +62,11 @@ def register(request):
                 # 'token':default_token_generator.make_token(user),
             to_email =[email,]
             print("activate email4")
-            from_email = settings.EMAIL_HOST_USER
-            # send_mail = EmailMessage(subject, message, to=[to_email])
-            send_mail(subject, message, from_email,  to_email)
+            # from_email = settings.EMAIL_HOST_USER
+            send_mail = EmailMessage(subject, message, to=to_email)
+            # send_mail(subject, message, from_email,  to_email   )
             print("activate email5")
+            # send_mail.send()
             send_mail.send()
             print("finished activate email")
             # send_mail(subject, message, to_email)

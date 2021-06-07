@@ -25,9 +25,11 @@
 
     <!-- register -->
     <!-- Bootstrap4 files-->
+    <!-- <script src="{% static 'https://code.jquery.com/jquery-3.6.0.min.js' %}" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
-  
+    <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script> -->
 
   </head>
 
@@ -62,59 +64,92 @@
         if (drop.style.display === 'none'){
         drop.style.display = 'inline'
         readmore.innerText = "Read Less"
+        console.log("more")
         
         } else {
           drop.style.display = 'none'
           readmore.innerText = "Read More"
+          console.log("less")
         };
 
       }; 
+
+      
+      // World Clock
+      let clock = () => {
+        let date = new Date();
+        let hrs = date.getHours();
+        let mint = date.getMinutes();
+        let sec = date.getSeconds();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        
+        day = day<10 ? 0 + day : day;
+        month = month<10 ? 0 + month : month;
+        let period = 'AM'
+        if (hrs == 0) hrs =12
+    
+        if (hrs > 12) {
+          hrs = hrs - 12
+          period = 'PM'
+        }
+        hrs = hrs < 10 ? 0 + hrs : hrs;
+        mint = mint < 10 ? 0 + mint : mint;
+        sec = sec < 10 ? 0 + sec : sec;
+
+        let time = `${hrs}:${mint}:${sec}:${period}`
+        let data = `${day}:${month}:${year}`
+        document.getElementById('clock').innerText = time 
+        setInterval(clock, 1000)
+      }
+      clock()
+
+      document.getElementById("hide").onclick = function() {
+        document.getElementById("message").style.display="none";
+        console.log("hi")
+        };
+      setTimeout(function() {
+        document.getElementById("message").style.display="none"
+      }, 6000)
+
+
+      $("#hide").click(function(){
+        $(this).hide();
+        console.log("hide")
+      });
+      
+
+    })
+    $("#hide").click(function(){
+      $(this).hide();
+      console.log("hide")
+    });
+
+    var productForm = $('.form-product-ajax')
+    productForm.submit(function(event){
+      event.preventDefualt();
+      console.log("submit")
     })
 
+    
+    document.getElementsByClassName("ajax").addEventListener("click", function(event){
+      event.preventDefault()
+    });
 
-    // World Clock
-    let clock = () => {
-      let date = new Date();
-      let hrs = date.getHours();
-      let mint = date.getMinutes();
-      let sec = date.getSeconds();
-      let day = date.getDate();
-      let month = date.getMonth() + 1;
-      let year = date.getFullYear();
-      
-      day = day<10 ? 0 + day : day;
-      month = month<10 ? 0 + month : month;
 
-      
 
-      let period = 'AM'
-      if (hrs == 0) hrs =12
-  
-      if (hrs > 12) {
-        hrs = hrs - 12
-        period = 'PM'
-      }
-      hrs = hrs < 10 ? 0 + hrs : hrs;
-      mint = mint < 10 ? 0 + mint : mint;
-      sec = sec < 10 ? 0 + sec : sec;
-
-      let time = `${hrs}:${mint}:${sec}:${period}`
-      let data = `${day}:${month}:${year}`
-      document.getElementById('clock').innerText = time 
-      setInterval(clock, 1000)
-    }
-    clock()
     
 
-    // Alert.html
-    document.getElementById("hide").onclick = function() {
-      document.getElementById("message").style.display="none";
-    };
-    setTimeout(function() {
-      document.getElementById("message").style.display="none"
-    }, 6000)
 
 
+    
+
+
+
+
+  
+    
     
     
 
@@ -127,3 +162,4 @@
   </body>
 
 </html>
+

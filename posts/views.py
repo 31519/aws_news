@@ -5,7 +5,7 @@ from .models import Posts
 from newsapi import NewsApiClient
 import requests
 import json
-from advertise.models import Advertise
+from advertise.models import Ads_Payment, Advertise
 from .forms import PostsForms
 from django.contrib.auth.decorators import login_required
 from about_us.models import AboutUs
@@ -20,7 +20,7 @@ def home(request):
 
 
 def local_news(request):
-    ads = Advertise.objects.all()
+    ads = Ads_Payment.objects.filter(active="True")
     posts = Posts.objects.all()
 
     context = {
@@ -30,7 +30,7 @@ def local_news(request):
     return render(request, 'post/local_news.html', context)
 
 def business(request):
-    ads = Advertise.objects.all().order_by('-adv_created_date')
+    ads = Ads_Payment.objects.filter(active="True")
     category = request.GET.get('category')
 
     
